@@ -8,7 +8,7 @@ from typing import Optional
 from pydantic import BaseModel
 import uvicorn
 
-# --- YARDIMCI FONKSİYONLAR ---
+# --- YARDIMCI FONKSİYONLAR -----
 def haversine(enlem_bir, boylam_bir, enlem_iki, boylam_iki):
     R = 6378000 # Metre cinsinden dünya yarıçapı
     enlem_bir = enlem_bir.iloc[0]
