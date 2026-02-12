@@ -118,6 +118,7 @@ def predict_price(house: House):
             "activity_score": score
         }
     }
+#--
 
 
 
