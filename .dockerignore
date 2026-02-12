@@ -1,0 +1,23 @@
+# --- Git Geçmişi (Gereksiz Şişkinlik) ---
+.git
+.gitignore
+
+# --- Sanal Ortamlar (EN ÖNEMLİSİ!) ---
+# Bilgisayarındaki venv Linux'ta çalışmaz. Docker kendi pip install'ını yapar.
+venv/
+env/
+.venv/
+
+# --- Python Ön Bellekleri ---
+__pycache__
+*.pyc
+
+# --- Sistem Dosyaları ---
+.DS_Store
+Thumbs.db
+
+# --- Dokümantasyon ve Ayarlar ---
+README.md
+docker-compose.yml
+Dockerfile
+.env

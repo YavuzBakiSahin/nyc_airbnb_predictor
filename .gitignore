@@ -1,0 +1,32 @@
+# --- Sistem Dosyaları (Mac & Windows) ---
+.DS_Store
+Thumbs.db
+
+# --- Python Gereksizleri ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Sanal Ortamlar (YÜKLEME SAKIN!) ---
+venv/
+env/
+.venv/
+.env/
+
+# --- Gizli Değişkenler (KRİTİK GÜVENLİK!) ---
+.env
+.env.local
+
+# --- IDE Ayarları (VS Code vs) ---
+.vscode/
+.idea/
+
+# --- Büyük/Gereksiz Veriler ---
+# backup.sql dosyasını BİLEREK eklemiyoruz, çünkü projeyi kuran kişinin ihtiyacı var.
+# Ama başka SQL dump alırsan onları yükleme:
+*.dump
+*.sqlite3
+
+# --- Loglar ---
+*.log

@@ -1,0 +1,88 @@
+
+
+# Docker versiyonu olarak 3.8 kullandık
+version: '3.8'
+
+
+# Servislerimiz. Bunlar her bir dosyamızı + database'imizi aktif olarak beraber çalıştıracak.
+services:
+
+  # Database servisimiz
+  database:
+    # Servis image'i olarak mysql:8.0 kullandık
+    image: mysql:8.0
+    # Konteynır adı.
+    container_name: nyc_db
+    restart: always
+    # Env verileri
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+    # Çalışacağı port
+    ports:
+      - "3307:3306"
+    # Tutulacak değerler
+    volumes:
+      # Sql verilerimizi mysql /var/lib/mysql klasöründe tutmaktadır. Bu nedenle ilgili verileri
+      # uzantıya ulaşarak db_data kutucuğuna koyduk.
+      - db_data:/var/lib/mysql
+      # Backup dosyamızı çalıştmaı için 
+      - ./backup.sql:/docker-entrypoint-initdb.d/init.sql
+    # Servisler arası iletişim ağı.
+    networks: 
+      - nyc_network
+  # Backend servisimiz.
+  backend:
+    # Oluşturmak için kullanacağı klasör bilgisi context olarak girilir.
+    # İçerideki Dockerfile dosyasını bulup çalıştırır.
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    # Konteynır adı.
+    container_name: nyc_backend
+    # Çalışacağı port.
+    ports:
+      - 8000:8000
+    # Backend içerisinde .env dosyasından veriler kullanmaktayız. 
+    # Bu verilere ulaşabilmek adına env_file olarak ilgili dosyayı docker içerisine belirtiyoruz.
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=nyc_database
+    # Bu servisimiz databese servisi çalışmadan çalışmayacaktır.
+    depends_on:
+      - database
+    # İletişim için kullanılan network
+    networks:
+      - nyc_network
+  # Frontend servisimiz
+  frontend:
+    # Oluşturmak için kullanacağı klasör bilgisi context olarak girilir.
+    # İçerideki Dockerfile dosyasını bulup çalıştırır.  
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    # Konteynır adı.
+    container_name: nyc_frontend
+    # Çalışacağı port.
+    ports:
+      - 8501:8501
+    environment:
+      - API_URL=http://backend:8000
+    # Backend servisi çalışmadan çalışmayacaktır.
+    depends_on:
+      - backend
+    # İletişim için kullanılan network
+    networks:
+      - nyc_network
+
+# Docker içerisinde tutmak istediğimiz veri deposu.
+volumes:
+  db_data:
+
+# nyc_network isminde bir köprü bağlantısı kuruyoruz.
+# Bu köprü bağlantısı sayesinde uygulamamızdaki tüm konteynırlar birbirleri ile haberleşebilecek.
+networks:
+  nyc_network:
+    driver: bridge
+    
