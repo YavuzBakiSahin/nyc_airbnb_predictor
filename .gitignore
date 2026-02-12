@@ -30,3 +30,6 @@ env/
 
 # --- Loglar ---
 *.log
+
+
+backend/data/raw/Nyc_Permitted_Events.csv

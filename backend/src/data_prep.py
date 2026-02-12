@@ -8,7 +8,7 @@ import joblib
 import os
 from sqlalchemy import create_engine
 
-
+# Veri yolu ayarları
 RAW_AIRBNB_DATA_PATH = 'data/raw/AB_NYC_2019.csv'
 RAW_METRO_DATA_PATH = 'data/raw/Nyc_Subway.csv'
 RAW_EVENT_DATA_PATH = 'data/raw/Nyc_Permitted_Events.csv'
@@ -42,7 +42,6 @@ def haversine(enlem_bir, boylam_bir, enlem_iki, boylam_iki):
 
 # dünyanın yarı çapı (metre)
 world_r = 6371000
-pd.set_option('display.max_columns', None)
 
 
 # Times Meydanının koordinatları, bu noktaya uzaklığı hesaplayıp fiyat tahmininde kullanacağız.
