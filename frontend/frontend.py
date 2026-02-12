@@ -41,6 +41,7 @@ if st.button("Tahmin!"):
         if response.status_code == 200:
             price = response.json()
             st.success(f"Tahmini Fiyat: {price['predicted_price_2026']} $")
+            st.info(f"Tahmin hata payı ortalama +/- 34$ olmaktadır.")
             st.info(f"Metroya Uzaklık: {price['details']['metro_dist']} metre")
 
         else:

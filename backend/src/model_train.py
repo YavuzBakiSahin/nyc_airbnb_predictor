@@ -13,14 +13,6 @@ import sqlalchemy
 import os
 from dotenv import load_dotenv
 
-# # Veri setimizin yolu.
-# DATA_PATH = 'data/processed/NY_With_SubwayAndEvents_vol1.csv'
-# # Pandas ayarları.
-# pd.set_option('display.max_columns', None)
-
-
-# # Veri setimizi okuyoruz.
-# df_airbnb = pd.read_csv(DATA_PATH)
 
 # Değişkenleri yükle
 load_dotenv()
